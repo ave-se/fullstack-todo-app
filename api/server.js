@@ -29,9 +29,14 @@ app.post("/todo/new", (req, res) => {
     text: req.body.text,
   });
 
-  todo.save();
-
-  res.json(todo);
+  todo
+    .save()
+    .then((savedTodo) => {
+      res.json(savedTodo);
+    })
+    .catch((error) => {
+      res.status(500).json({ error: "Error saving todo" });
+    });
 });
 
 app.delete("/todo/delete/:id", async (req, res) => {

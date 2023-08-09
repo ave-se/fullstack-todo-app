@@ -1,4 +1,4 @@
-GET http://localhost:3001/todos HTTP/1.1
+GET http://localhost:3001/todos 
 
 ###
 
@@ -11,11 +11,27 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3001/todo/delete/60e585eb6177f95ff0574326
+DELETE http://localhost:3001/todo/delete/64d397eb553ee54a800568f1
 
 ###
 
-PUT http://localhost:3001/todo/update/60e585d86177f95ff0574323
+GET http://localhost:3001/todo/complete/64d397eb553ee54a800568f1
+
+###
+
+PUT http://localhost:3001/todo/update/64d397eb553ee54a800568f1
+Content-Type: application/json
+
+{
+	"text": "Go Shopping for Milk"
+}
+
+
+GET http://localhost:todo/complete/64d397eb553ee54a800568f1
+
+###
+
+PUT http://localhost:3001/todo/update/64d397eb553ee54a800568f1
 Content-Type: application/json
 
 {
