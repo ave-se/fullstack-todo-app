@@ -18,36 +18,50 @@ function App() {
   };
 
   const completeTodo = async (id) => {
-    const data = await fetch(api_base + "/todo/complete/" + id).then((res) =>
-      res.json()
-    );
+    try {
+      const response = await fetch(api_base + "/todo/complete/" + id);
+      if (!response.ok) {
+        throw new Error("Request failed with status " + response.status);
+      }
+      const data = await response.json();
 
-    setTodos((todos) =>
-      todos.map((todo) => {
-        if (todo._id === data._id) {
-          todo.complete = data.complete;
-        }
-
-        return todo;
-      })
-    );
+      setTodos((todos) =>
+        todos.map((todo) => {
+          if (todo._id === data._id) {
+            todo.complete = data.complete;
+          }
+          return todo;
+        })
+      );
+    } catch (error) {
+      console.error("Error completing todo:", error);
+    }
   };
 
   const addTodo = async () => {
-    const data = await fetch(api_base + "/todo/new", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        text: newTodo,
-      }),
-    }).then((res) => res.json());
+    try {
+      const response = await fetch(api_base + "/todo/new", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          text: newTodo,
+        }),
+      });
 
-    setTodos([...todos, data]);
+      if (!response.ok) {
+        throw new Error("Request failed with status " + response.status);
+      }
 
-    setPopupActive(false);
-    setNewTodo("");
+      const data = await response.json();
+
+      setTodos([...todos, data]);
+      setPopupActive(false);
+      setNewTodo("");
+    } catch (error) {
+      console.error("Error adding todo:", error);
+    }
   };
 
   const deleteTodo = async (id) => {
