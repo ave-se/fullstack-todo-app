@@ -1,7 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const path = require("path");
 
 const app = express();
 
@@ -17,7 +16,7 @@ mongoose
   .catch(console.error);
 
 // Models
-const Todo = require("../models/Todo"); // Adjust the path based on your project structure
+const Todo = require("./models/Todo");
 
 app.get("/todos", async (req, res) => {
   const todos = await Todo.find();
@@ -25,17 +24,45 @@ app.get("/todos", async (req, res) => {
   res.json(todos);
 });
 
-// ... Other routes ...
+app.post("/todo/new", (req, res) => {
+  const todo = new Todo({
+    text: req.body.text,
+  });
 
-// Serve static files from the React build
-app.use(express.static(path.join(__dirname, "..", "client", "build")));
-
-// For any other route, serve the React app
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "client", "build", "index.html"));
+  todo
+    .save()
+    .then((savedTodo) => {
+      res.json(savedTodo);
+    })
+    .catch((error) => {
+      res.status(500).json({ error: "Error saving todo" });
+    });
 });
 
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.delete("/todo/delete/:id", async (req, res) => {
+  const result = await Todo.findByIdAndDelete(req.params.id);
+
+  res.json({ result });
 });
+
+app.get("/todo/complete/:id", async (req, res) => {
+  const todo = await Todo.findById(req.params.id);
+
+  todo.complete = !todo.complete;
+
+  todo.save();
+
+  res.json(todo);
+});
+
+app.put("/todo/update/:id", async (req, res) => {
+  const todo = await Todo.findById(req.params.id);
+
+  todo.text = req.body.text;
+
+  todo.save();
+
+  res.json(todo);
+});
+
+app.listen(3001);
