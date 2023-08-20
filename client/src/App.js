@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-const api_base = "http://localhost:3001";
+const api_base = process.env.REACT_APP_BACKEND_URL || "http://localhost:3001";
 
 function App() {
   const [todos, setTodos] = useState([]);
