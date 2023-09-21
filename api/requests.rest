@@ -1,8 +1,8 @@
-GET http://localhost:3001/todos 
+GET https://shrouded-wildwood-33076-84272b329fbd.herokuapp.com/todos
 
 ###
 
-POST http://localhost:3001/todo/new
+POST https://shrouded-wildwood-33076-84272b329fbd.herokuapp.com/todo/new
 Content-Type: application/json
 
 {
@@ -11,27 +11,26 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3001/todo/delete/64d397eb553ee54a800568f1
+DELETE https://shrouded-wildwood-33076-84272b329fbd.herokuapp.com/todo/delete/64d397eb553ee54a800568f1
 
 ###
 
-GET http://localhost:3001/todo/complete/64d397eb553ee54a800568f1
+GET https://shrouded-wildwood-33076-84272b329fbd.herokuapp.com/todo/complete/64d397eb553ee54a800568f1
 
 ###
 
-PUT http://localhost:3001/todo/update/64d397eb553ee54a800568f1
+PUT https://shrouded-wildwood-33076-84272b329fbd.herokuapp.com/todo/update/64d397eb553ee54a800568f1
 Content-Type: application/json
 
 {
 	"text": "Go Shopping for Milk"
 }
 
-
-GET http://localhost:todo/complete/64d397eb553ee54a800568f1
+GET https://shrouded-wildwood-33076-84272b329fbd.herokuapp.com/todo/complete/64d397eb553ee54a800568f1
 
 ###
 
-PUT http://localhost:3001/todo/update/64d397eb553ee54a800568f1
+PUT https://shrouded-wildwood-33076-84272b329fbd.herokuapp.com/todo/update/64d397eb553ee54a800568f1
 Content-Type: application/json
 
 {

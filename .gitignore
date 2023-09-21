@@ -1,2 +1,9 @@
 # Local Netlify folder
-.netlify
+
+# .gitignore
+
+# Ignore environment variables file
+.env
+
+# Keep Netlify configuration files
+netlify.toml

@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 const api_base =
   process.env.NODE_ENV === "production"
     ? process.env.REACT_APP_API_URL_PROD
-    : process.env.REACT_APP_BACKEND_URL || "http://localhost:3001";
+    : process.env.REACT_APP_BACKEND_URL ||
+      "https://shrouded-wildwood-33076-84272b329fbd.herokuapp.com/";
 
 function App() {
   const [todos, setTodos] = useState([]);
